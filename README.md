@@ -7,7 +7,9 @@
 
 # Transform laravel requests
 
-transform laravel requests in an easy way.
+you can **normalize** or **change request data structure** with transformers.
+
+> lets **normalize** our data in `transformers` and let `controllers` to be much more **cleaner** and **smaller**.
 
 ## List of contents
 
@@ -33,7 +35,7 @@ $ composer require shetabit/transform-request
 
 #### Create a new data transformer
 
-we use transformers to transform request datas.
+> we use transformers to transform request data.
 
 you can run the below command in your console in order to create a new data transformer named `TestTransformer`.
 
