@@ -34,7 +34,7 @@ class TransformerMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return base_path('vendor/shetabit/extractor/src/Console/stubs/transformer.stub');
+        return base_path('vendor/shetabit/transform-request/src/Console/stubs/transformer.stub');
     }
 
     /**
