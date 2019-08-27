@@ -60,8 +60,8 @@ class ServiceProvider extends ParentServiceProvider
 
     protected function addMacros()
     {
-        Request::macro('transform', function($keys) {
-            $keys = is_array($keys) ? $keys : func_get_args();
+        Request::macro('transform', function($keys = null) {
+            $keys = (!empty($keys) && is_array($keys)) ? $keys : func_get_args();
 
             $originalData = empty($keys) ? $this->all() : $this->only($keys);
 
