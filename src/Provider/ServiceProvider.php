@@ -27,6 +27,11 @@ class ServiceProvider extends ParentServiceProvider
          * Add essential macros
          */
         $this->addMacros();
+
+        /**
+         * Add console commands
+         */
+        $this->loadCommands();
     }
 
     /**
