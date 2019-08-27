@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Shetabit\\RequestTransformer\\": "src"
+            "Shetabit\\TransformRequest\\": "src"
         },
         "files": [
             "src/helpers.php"
@@ -36,7 +36,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Shetabit\\RequestTransformer\\Tests\\": "tests"
+            "Shetabit\\TransformRequest\\Tests\\": "tests"
         }
     },
     "scripts": {
