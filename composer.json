@@ -1,0 +1,63 @@
+{
+    "name": "shetabit/transform-request",
+    "type": "library",
+    "description": "Transform laravel requests",
+    "keywords": [
+        "transform laravel requests",
+        "modify laravel request key names"
+    ],
+    "homepage": "https://github.com/shetabit/transform-request",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mahdi khanzadi",
+            "email": "khanzadimahdi@gmail.com",
+            "homepage": "https://github.com/khanzadimahdi",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "illuminate/support": "~5.6",
+        "php": ">=7.2",
+        "shetabit/transformer": "^2.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.8",
+        "phpunit/phpunit": ">=8.3",
+        "squizlabs/php_codesniffer": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shetabit\\RequestTransformer\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shetabit\\RequestTransformer\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
+        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Shetabit\\TransformRequest\\Provider\\ServiceProvider"
+            ],
+            "aliases": {
+                "RequestTransformer": "Shetabit\\TransformRequest\\Facade\\Transform"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
