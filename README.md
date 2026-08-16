@@ -7,7 +7,17 @@
 
 # Transform laravel requests
 
+[![Software License][ico-license]](LICENSE.md)
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Total Downloads on Packagist][ico-download]][link-packagist]
+[![Tests][ico-tests]][link-tests]
+[![Code Style][ico-code-style]][link-code-style]
+[![Static Analysis][ico-static-analysis]][link-static-analysis]
+[![Code Coverage][ico-coverage]][link-coverage]
+
 you can **normalize** or **change request data structure** with transformers.
+
+This package supports `PHP 8.4+` and `Laravel 12` and `13`.
 
 > lets **normalize** our data in `transformers` and let `controllers` to be much more **cleaner** and **smaller**.
 
@@ -125,11 +135,59 @@ If you discover any security related issues, please email khanzadimahdi@gmail.co
 - [Mahdi khanzadi][link-author]
 - [All Contributors][link-contributors]
 
+## Testing
+
+Every pull request and every push to `master` is checked by [GitHub Actions][link-actions]: the test suite runs on
+PHP 8.4 and 8.5 against Laravel 12 and 13 (both the lowest and the highest supported dependencies), the coding style
+is checked with PHP_CodeSniffer, the sources are analysed with PHPStan and the code coverage is measured.
+
+The feature tests send real requests through a Laravel application built by Orchestra Testbench, and the
+`make:transformer` command is run and its output checked.
+
+```bash
+composer install
+
+composer test           # run the test suite
+composer test-coverage  # run the test suite and report code coverage
+composer check-style    # check the coding style
+composer fix-style      # fix the coding style where possible
+composer analyse        # run static analysis
+composer ci             # run all of the checks above
+```
+
+If you would rather not install PHP on your machine, the shipped `Dockerfile` and `Makefile` run everything inside a
+container:
+
+```bash
+make test              # run the test suite
+make coverage          # run the test suite and report code coverage
+make check-style       # check the coding style
+make fix-style         # fix the coding style where possible
+make analyse           # run static analysis
+make ci                # run all of the checks above
+make shell             # open a shell inside the container
+make help              # list every available target
+```
+
+Another PHP version can be used with `make test PHP_VERSION=8.5`.
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
+[ico-version]: https://img.shields.io/packagist/v/shetabit/transform-request.svg?style=flat-square
+[ico-download]: https://img.shields.io/packagist/dt/shetabit/transform-request.svg?color=%23F18&style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-tests]: https://img.shields.io/github/actions/workflow/status/shetabit/transform-request/tests.yml?branch=master&label=Tests&style=flat-square
+[ico-code-style]: https://img.shields.io/github/actions/workflow/status/shetabit/transform-request/code-style.yml?branch=master&label=Code%20Style&style=flat-square
+[ico-static-analysis]: https://img.shields.io/github/actions/workflow/status/shetabit/transform-request/static-analysis.yml?branch=master&label=Static%20Analysis&style=flat-square
+[ico-coverage]: https://img.shields.io/codecov/c/github/shetabit/transform-request/master?label=Coverage&style=flat-square
+
 [link-packagist]: https://packagist.org/packages/shetabit/transform-request
-[link-code-quality]: https://scrutinizer-ci.com/g/shetabit/transform-request
+[link-actions]: https://github.com/shetabit/transform-request/actions
+[link-tests]: https://github.com/shetabit/transform-request/actions/workflows/tests.yml
+[link-code-style]: https://github.com/shetabit/transform-request/actions/workflows/code-style.yml
+[link-static-analysis]: https://github.com/shetabit/transform-request/actions/workflows/static-analysis.yml
+[link-coverage]: https://codecov.io/gh/shetabit/transform-request
 [link-author]: https://github.com/khanzadimahdi
 [link-contributors]: ../../contributors

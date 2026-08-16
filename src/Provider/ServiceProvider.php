@@ -3,53 +3,41 @@
 namespace Shetabit\TransformRequest\Provider;
 
 use Illuminate\Http\Request;
-use Shetabit\TransformRequest\Console\Commands\TransformerMakeCommand;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider as ParentServiceProvider;
+use Shetabit\TransformRequest\Console\Commands\TransformerMakeCommand;
+use Shetabit\TransformRequest\Facade\Transform as TransformFacade;
 use Shetabit\TransformRequest\Transform;
 
 class ServiceProvider extends ParentServiceProvider
 {
     /**
-     * Perform post-registration booting of services.
-     *
-     * @return void
+     * The name of the macro this package adds to `Illuminate\Http\Request`.
      */
-    public function boot()
-    {
-        /**
-         * Bind to service container.
-         */
-        $this->app->bind('shetabit-transform-request', function () {
-            return new Transform();
-        });
+    public const string REQUEST_MACRO = 'transform';
 
-        /**
-         * Add essential macros
-         */
+    /**
+     * Register any package services.
+     */
+    public function register() : void
+    {
+        $this->app->bind(TransformFacade::SERVICE_NAME, static fn () : Transform => new Transform());
+    }
+
+    /**
+     * Perform post-registration booting of services.
+     */
+    public function boot() : void
+    {
         $this->addMacros();
 
-        /**
-         * Add console commands
-         */
         $this->loadCommands();
     }
 
     /**
-     * Register any package services.
-     *
-     * @return void
+     * Load artisan commands.
      */
-    public function register()
-    {
-        //
-    }
-
-    /**
-     * Load artisan commands
-     *
-     * @return void
-     */
-    protected function loadCommands()
+    protected function loadCommands() : void
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -58,14 +46,18 @@ class ServiceProvider extends ParentServiceProvider
         }
     }
 
-    protected function addMacros()
+    /**
+     * Add essential macros.
+     */
+    protected function addMacros() : void
     {
-        Request::macro('transform', function($keys = null) {
-            $keys = (!empty($keys) && is_array($keys)) ? $keys : func_get_args();
+        Request::macro(self::REQUEST_MACRO, function (array|string ...$keys) : Transform {
+            /** @var Request $request */
+            $request = $this;
 
-            $originalData = empty($keys) ? $this->all() : $this->only($keys);
+            $keys = Arr::flatten($keys);
 
-            return new Transform($originalData);
+            return new Transform($keys === [] ? $request->all() : $request->only($keys));
         });
     }
 }

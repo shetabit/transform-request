@@ -2,15 +2,13 @@
 
 use Shetabit\TransformRequest\Transform;
 
-if (!function_exists('Transform')) {
+// Not `transform()`: that is a Laravel helper the framework calls itself.
+if (! function_exists('transform_request')) {
     /**
-     * Access Transform through helper.
-     *
-     * @param array $values
-     * @return Transform
+     * @param array<array-key, mixed> $values
      */
-    function transform($values = []) : Transform
+    function transform_request(array $values = []) : Transform
     {
-        return (new Transform)->setOriginalData($values);
+        return new Transform($values);
     }
 }

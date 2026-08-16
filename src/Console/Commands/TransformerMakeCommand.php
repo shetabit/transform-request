@@ -3,7 +3,9 @@
 namespace Shetabit\TransformRequest\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'make:transformer')]
 class TransformerMakeCommand extends GeneratorCommand
 {
     /**
@@ -30,20 +32,18 @@ class TransformerMakeCommand extends GeneratorCommand
     /**
      * Get the stub file for the generator.
      *
-     * @return string
+     * The path used to be built with `base_path()`, which only ever pointed at the
+     * right file when the package sat in `vendor/shetabit/transform-request`.
      */
-    protected function getStub()
+    protected function getStub() : string
     {
-        return base_path('vendor/shetabit/transform-request/src/Console/stubs/transformer.stub');
+        return dirname(__DIR__).'/stubs/transformer.stub';
     }
 
     /**
      * Get the default namespace for the class.
-     *
-     * @param  string  $rootNamespace
-     * @return string
      */
-    protected function getDefaultNamespace($rootNamespace)
+    protected function getDefaultNamespace($rootNamespace) : string
     {
         return $rootNamespace.'\Http\Transformers';
     }

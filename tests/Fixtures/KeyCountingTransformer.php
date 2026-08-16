@@ -1,10 +1,10 @@
 <?php
 
-namespace {{ namespace }};
+namespace Shetabit\TransformRequest\Tests\Fixtures;
 
 use Shetabit\Transformer\Contracts\TransformerInterface;
 
-class {{ class }} implements TransformerInterface
+class KeyCountingTransformer implements TransformerInterface
 {
     /**
      * @param array<array-key, mixed> $data
@@ -12,8 +12,6 @@ class {{ class }} implements TransformerInterface
      */
     public function transform(array $data) : array
     {
-        return [
-            //
-        ];
+        return ['keys' => array_keys($data), 'count' => count($data)];
     }
 }
