@@ -31,7 +31,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - The container binding moved from `boot()` to `register()`, which is where Laravel expects bindings to be made.
 - `shetabit/transformer` is required as `^2.0.1|^3.0`. **v2.0 of that package cannot be used**: its own
   `Transform::transform()` calls a `setTransformer()` that release does not define, so any use of it is a fatal error.
-  v2.0.1 added the method. The `|^3.0` is there for the modernized transformer once it is released.
+  v2.0.1 added the method. The upper half of the constraint takes transformer 3.x, which the suite is checked
+  against.
 
 ### Removed
 - The Travis CI configuration (`.travis.yml`), replaced by GitHub Actions.
